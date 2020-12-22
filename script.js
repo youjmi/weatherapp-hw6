@@ -18,11 +18,10 @@ $("#btn").on("click",function (e) {
 
     $.ajax({
         type: "GET",
-        url: queryURL,  
+        url: queryURL,
     }) 
     .then(function(response) {
-    console.log(response)
-       
+       console.log(response)
     }) 
 })
 
