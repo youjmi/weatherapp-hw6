@@ -9,12 +9,15 @@ setInterval(function () {
 //Set up Button Click function to call info
 $("#btn").on("click", function (e) {
     e.preventDefault();
-    
+
     var cityName = $("#enterCity").val().trim()
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial"+"&appid=" + ApiKey;
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + ApiKey;
     if (cityName === "") {
-        alert ("Please put valid City name. ")
+        alert("Please put valid City name. ")
+        
+        firstCall()
     }
+
     $.ajax({
         type: "GET",
         url: queryURL,
@@ -27,35 +30,53 @@ $("#btn").on("click", function (e) {
                 //City, Temps to Pull on Main
                 var cityMain = $("<h2>").text(response.name);
                 var searchTemp = $("<h4>").text("Temperature: " + response.main.temp + "°F")
-                var searchFeels = $("<h5>").text("But Feels Like: " +response.main.feels_like + "°F")
+                var searchFeels = $("<h4>").text("But Feels Like: " + response.main.feels_like + "°F")
 
                 //List of Information pulled to Search/
-                var searchCity = $("<h3>").text(response.name)
-    
+                var searchCity = $("<h4>").text(response.name)
+
                 //Weather and Icons
                 var wiconURL = $('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '.png" alt="weather icon">')
 
-                $("#WeatherInfo").append(cityMain,wiconURL,searchTemp,searchFeels,)
+                //Humidity//
+                var humidity = $("<h4>").text("Humidity: " + response.main.humidity + "%")
+
+                //Force thru
+                $("#MainInfo").append(cityMain, wiconURL, searchTemp, searchFeels, humidity)
                 $("#searchInfo").append(searchCity)
             }
+            fiveDayForecast()
         })
     //5 day forecast//
-    
-    var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + ApiKey;
-    
+    function fiveDayForecast() {
 
-    $.ajax({
-        url: fivedayForecast,
-        method: "GET",
-        dataType :"jsonp",
-    })
-        .then(function (response) {
-            console.log(response)
-
+        var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + ApiKey;
+        $.ajax({
+            type: "GET",
+            url: fivedayForecast,
+            dataType: "jsonp"
         })
+            .then(function (response) {
+                console.log(response)
+
+                for (var i = 1; i < 6; i++) {
+
+                    var fiveDayDate = moment().format('L');
+                    var indDayDate = fiveDayDate[i]
+                    
+
+                    $("#forecast").append(fiveDayDate, indDayDate)
+                }
+            }
+            )}
+            
+    })
+
+   
+   
+function clearBox() {
+    $("#MainInfo").empty()
+    $("#forecast").empty()
     
-})
-function clearBox(){
-$("#WeatherInfo").empty()
 }
 //clear functions
