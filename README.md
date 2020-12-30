@@ -13,7 +13,7 @@ In the weather dashboard, you will be able to see the searched cites with the we
 
 <img width="1438" alt="Screen Shot 2020-12-29 at 7 56 38 PM" src="https://user-images.githubusercontent.com/73494581/103323412-c0d44100-4a10-11eb-9d2a-3cc128595ab0.png">
 
+<img width="1354" alt="Screen Shot 2020-12-30 at 2 23 36 AM" src="https://user-images.githubusercontent.com/73494581/103336410-1c6cf180-4a46-11eb-908b-2019e510ec32.png">
 
-<img width="1439" alt="Screen Shot 2020-12-29 at 7 56 59 PM" src="https://user-images.githubusercontent.com/73494581/103323426-c6318b80-4a10-11eb-87ba-b9676c76515c.png">
 
 
