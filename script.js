@@ -1,4 +1,6 @@
 
+//Global Variables
+
 var currentDate = $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 var ApiKey = "964e1a54e21fa546d4037b013310911c"
 
@@ -14,16 +16,17 @@ setInterval(function () {
 $("#btn").on("click", function (e) {
     e.preventDefault();
 
-    
+    //1st url//-Search for basic info//
     var cityName = $("#enterCity").val().trim()
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + ApiKey;
     if (cityName === "") {
         alert("Please put valid City name. ")
     }
+    //localstorage//    
     localStorage.setItem("Saved Cities", cityName)
     var savedcity = localStorage.getItem("Saved Cities")
     
-    $.ajax({
+    $.ajax({        
         type: "GET",
         url: queryURL,
         dataType: "jsonp"
@@ -47,7 +50,7 @@ $("#btn").on("click", function (e) {
                 var humidity = $("<h5>").text("Humidity: " + response.main.humidity + "%")
 
 
-                //Force thru
+                //Force thru to page
                 $("#MainInfo").append(cityMain, wiconURL, searchTemp, searchFeels, humidity)
                 $("#searchInfo").append(searchCity)
 
@@ -56,7 +59,7 @@ $("#btn").on("click", function (e) {
             var lon = response.coord.lon
             var lat = response.coord.lat
 
-
+            //second url for UV Index//
             var uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + ApiKey;
 
             $.ajax({
@@ -88,7 +91,7 @@ $("#btn").on("click", function (e) {
                     $("#MainInfo").append(uviVal)
 
                 })
-
+                //3rd URL for 5 day forecast//
             var ForecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + ApiKey;
             $.ajax({
                 url: ForecastURL,
@@ -118,6 +121,7 @@ $("#btn").on("click", function (e) {
                 })
         })
 
+        //clearing out everything after every click so info does not double up//
     function clearBox() {
         $("#MainInfo").empty()
         $("#forecast").empty()
