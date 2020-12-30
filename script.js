@@ -39,103 +39,74 @@ $("#btn").on("click", function (e) {
 
                 //Humidity//
                 var humidity = $("<h5>").text("Humidity: " + response.main.humidity + "%")
-            
+
 
                 //Force thru
                 $("#MainInfo").append(cityMain, wiconURL, searchTemp, searchFeels, humidity)
                 $("#searchInfo").append(searchCity)
-        
+
             }
 
             var lon = response.coord.lon
             var lat = response.coord.lat
-    
-    
+
+
             var uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + ApiKey;
-    
-            $.ajax ({
+
+            $.ajax({
                 url: uvURL,
                 method: "GET"
             })
-            .then(function (uvi) { 
-                console.log(uvi)
+                .then(function (uvi) {
+                    console.log(uvi)
 
-                var uviVal = $("<h5>").text("UV Index: " + uvi.value);
-
-
-                if (uvi.value >=0 && uvi.value< 3) {
-                    $(uviVal).attr("class","low")
-                }
-                else if (uvi.value >= 3 && uvi.value < 6) {
-                    $(uviVal).attr("class","moderate")
-                }
-                else if (uvi.value >= 6 && uvi.value <8 ) {
-                    $(uviVal).attr("class","high")
-                }
-                else if (uvi.value >= 8 && uvi.value < 11) {
-                    $(uviVal).attr("class","veryHigh")
-                }
-                else (
-                    $(uviVal).attr("class","extremelyHigh")
-                )
-                
-                $("#MainInfo").append(uviVal)
-
-             })
-
-             var ForecastURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + ApiKey;
-             $.ajax({
-                 url: ForecastURL,
-                 method: "GET",
-                 dataType: "jsonp"
-             })
-             .then(function (forecast) {  
-                console.log(forecast)
-
-                     for (var i= 0; i< 6; i++){
-                    
-                        var date = moment().add(i,"days").format('l')
-                        var forDate = $("<h4>").text(date) 
-                        var tempHigh = $("<h6>").text("Highest Temp: " + forecast.main.temp_max + "°F")
-                        var tempLow = $("<h6>").text("Lowest Temp: " + forecast.main.temp_min + "°F")
-                        var forhumidity = $("<h6>").text("Humidity: " + forecast.main.humidity + "%")
-                        var wiconURL = $('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '.png" alt="weather icon">')
+                    var uviVal = $("<h5>").text("UV Index: " + uvi.value);
 
 
-                        $("#forecast").append(forDate,wiconURL,tempHigh,tempLow,forhumidity)
-                    
-                     }
-             })
+                    if (uvi.value >= 0 && uvi.value < 3) {
+                        $(uviVal).attr("class", "low")
+                    }
+                    else if (uvi.value >= 3 && uvi.value < 6) {
+                        $(uviVal).attr("class", "moderate")
+                    }
+                    else if (uvi.value >= 6 && uvi.value < 8) {
+                        $(uviVal).attr("class", "high")
+                    }
+                    else if (uvi.value >= 8 && uvi.value < 11) {
+                        $(uviVal).attr("class", "veryHigh")
+                    }
+                    else (
+                        $(uviVal).attr("class", "extremelyHigh")
+                    )
+
+                    $("#MainInfo").append(uviVal)
+
+                })
+            
+            var ForecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + ApiKey;
+            $.ajax({
+                url: ForecastURL,
+                method: "GET",
+                dataType: "jsonp"
+            })
+                .then(function (forecast) {
+                    console.log(forecast)
+
+                    for (var i = 0; i < 6; i++) {
+
+                        var date = moment().add(i, "days").format('l')
+                        var forDate = $("<h4>").text(date)
+                        var tempHigh = $("<h6>").text("Highest Temp: " + forecast.daily[i].temp.max + "°F")
+                        var tempLow = $("<h6>").text("Lowest Temp: " + forecast.daily[i].temp.min + "°F")
+                        var forhumidity = $("<h6>").text("Humidity: " + forecast.daily[i].humidity + "%")
+                        var wiconURL = $('<img src="https://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '.png" alt="weather icon">')
+
+
+                        $("#forecast").append(forDate, wiconURL, tempHigh, tempLow, forhumidity)
+
+                    }
+                })
         })
-        
-
-
-    //5 day forecast//
-    // function fiveDayForecast() {
-
-    //     var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + ApiKey;
-    //     $.ajax({
-    //         type: "GET",
-    //         url: fivedayForecast,
-    //         dataType: "jsonp"
-    //     })
-    //         .then(function (forecast) {
-    //             console.log(forecast)
-
-    //             for (var i = 1; i < 6; i++) {
-
-    //                 var indDayDate = $("<h4>").text(moment().format('L')[i])
-
-
-    //                 $("#forecast").append(fiveDayDate, indDayDate)
-    //             }
-    //         }
-    //         )}
-
-    // })
-
-
-
 
     function clearBox() {
         $("#MainInfo").empty()

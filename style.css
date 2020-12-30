@@ -42,4 +42,5 @@
 #forecast {
     background-color:deepskyblue;
     max-width: 11rem;
+    margin: auto;
 }
