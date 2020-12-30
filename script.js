@@ -94,8 +94,8 @@ $("#btn").on("click", function (e) {
 
                      for (var i= 0; i< 6; i++){
                     
-                        var date = moment().format('L')
-                        var forDate = $("<h4>").text(date)
+                        var date = moment().add(i,"days").format('l')
+                        var forDate = $("<h4>").text(date) 
                         var tempHigh = $("<h6>").text("Highest Temp: " + forecast.main.temp_max + "°F")
                         var tempLow = $("<h6>").text("Lowest Temp: " + forecast.main.temp_min + "°F")
                         var forhumidity = $("<h6>").text("Humidity: " + forecast.main.humidity + "%")
