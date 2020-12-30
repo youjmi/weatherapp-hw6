@@ -27,7 +27,7 @@ $("#btn").on("click", function (e) {
                 clearBox()
 
                 //City, Temps to Pull on Main
-                var cityMain = $("<h2>").text(response.name);
+                var cityMain = $("<h2>").text("Today's weather in: "+ response.name);
                 var searchTemp = $("<h5>").text("Temperature: " + response.main.temp + "°F")
                 var searchFeels = $("<h5>").text("But Feels Like: " + response.main.feels_like + "°F")
 
@@ -92,8 +92,12 @@ $("#btn").on("click", function (e) {
                 .then(function (forecast) {
                     console.log(forecast)
 
+                    var title = $("<h2>").text("5 Day Forecast")
+                    $("#title").append(title)
+
                     for (var i = 0; i < 6; i++) {
 
+                        
                         var date = moment().add(i, "days").format('l')
                         var forDate = $("<h4>").text(date)
                         var tempHigh = $("<h6>").text("Highest Temp: " + forecast.daily[i].temp.max + "°F")
@@ -101,7 +105,7 @@ $("#btn").on("click", function (e) {
                         var forhumidity = $("<h6>").text("Humidity: " + forecast.daily[i].humidity + "%")
                         var wiconURL = $('<img src="https://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '.png" alt="weather icon">')
 
-
+                        
                         $("#forecast").append(forDate, wiconURL, tempHigh, tempLow, forhumidity)
 
                     }
@@ -111,5 +115,6 @@ $("#btn").on("click", function (e) {
     function clearBox() {
         $("#MainInfo").empty()
         $("#forecast").empty()
+        $("#title").empty()
     }
 })
