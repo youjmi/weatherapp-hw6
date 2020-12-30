@@ -13,4 +13,4 @@ In the weather dashboard, you will be able to see the searched cites with the we
 
 <img width="1438" alt="Screen Shot 2020-12-29 at 7 56 38 PM" src="https://user-images.githubusercontent.com/73494581/103323412-c0d44100-4a10-11eb-9d2a-3cc128595ab0.png">
 
-![screencapture-youjmi-github-io-weatherapp-hw6-2020-12-30-02_23_38](https://user-images.githubusercontent.com/73494581/103336516-6e157c00-4a46-11eb-9e9f-6a3a914925ac.png)
+![screencapture-youjmi-github-io-weatherapp-hw6-2020-12-30-02_23_38](https://user-images.githubusercontent.com/73494581/103336559-90a79500-4a46-11eb-9710-c094c2494385.png)
