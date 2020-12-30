@@ -92,7 +92,7 @@ $("#btn").on("click", function (e) {
              .then(function (forecast) {  
                 console.log(forecast)
 
-                    // for (var i= 0; i< 6; i++){
+                     for (var i= 0; i< 6; i++){
                     
                         var date = moment().format('L')
                         var forDate = $("<h4>").text(date)
@@ -104,7 +104,7 @@ $("#btn").on("click", function (e) {
 
                         $("#forecast").append(forDate,wiconURL,tempHigh,tempLow,forhumidity)
                     
-                    })
+                     }
              })
         })
         
@@ -141,4 +141,4 @@ $("#btn").on("click", function (e) {
         $("#MainInfo").empty()
         $("#forecast").empty()
     }
-
+})
