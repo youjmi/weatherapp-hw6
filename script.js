@@ -20,8 +20,8 @@ $("#btn").on("click", function (e) {
     if (cityName === "") {
         alert("Please put valid City name. ")
     }
-    localStorage.setItem("cities", cityName)
-    var savedcity = localStorage.getItem("cities")
+    localStorage.setItem("Saved Cities", cityName)
+    var savedcity = localStorage.getItem("Saved Cities")
     
     $.ajax({
         type: "GET",
